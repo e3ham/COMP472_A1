@@ -14,3 +14,9 @@ data = data.drop(columns=categories)
 data = pd.concat([data, df], axis=1)
 
 print(data)
+
+
+# without using SKLearn:
+# data = pd.read_csv("penguins.csv")
+# data = pd.get_dummies(data, columns=['island', 'sex'])
+# print(data)
