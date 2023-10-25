@@ -80,3 +80,48 @@ plot_tree(baseDT_abalone, filled=True, feature_names=X.columns, class_names=base
 plt.title("Abalone Decision Tree Visualization")
 plt.show()
 print("Accuracy:", metrics.accuracy_score(Z_test, Z_pred))
+
+# Different values for the gridsearch tree
+max_depth_vals = [2, 5, None]
+min_samples_split_vals = [3, 6, 10]
+criterion_vals = ["gini", "entropy"]
+
+# Picking through the different values and testing the penguins dataset
+for criterion in criterion_vals:
+    for max_depth in max_depth_vals:
+        for min_samples_split in min_samples_split_vals:
+            topDT_penguins = DecisionTreeClassifier(criterion=criterion, max_depth=max_depth,
+                                                    min_samples_split=min_samples_split, random_state=42)
+            topDT_penguins.fit(X_train, Y_train)
+
+            plt.figure(figsize=(10, 6))
+            plot_tree(
+                topDT_penguins,
+                filled=True,
+                feature_names=X.columns,
+                class_names=topDT_penguins.classes_,
+                rounded=True
+            )
+            plt.title(
+                f"Penguins Decision Tree (Criterion: {criterion}, Max Depth: {max_depth}, Min Samples Split: {min_samples_split})")
+            plt.show()
+
+# Picking through the different values and testing the abalone dataset
+for criterion in criterion_vals:
+    for max_depth in max_depth_vals:
+        for min_samples_split in min_samples_split_vals:
+            topDT_abalone = DecisionTreeClassifier(criterion=criterion, max_depth=max_depth,
+                                                   min_samples_split=min_samples_split, random_state=42)
+            topDT_abalone.fit(X_train, Y_train)
+
+            plt.figure(figsize=(10, 6))
+            plot_tree(
+                topDT_abalone,
+                filled=True,
+                feature_names=X.columns,
+                class_names=topDT_abalone.classes_,
+                rounded=True
+            )
+            plt.title(f"Abalone Decision Tree (Criterion: {criterion}, Max Depth: {max_depth}, "
+                      f"Min Samples Split: {min_samples_split})")
+            plt.show()
