@@ -61,6 +61,10 @@ encoded = ohe.fit_transform(penguins[penguinCategories])
 # Creating a dataframe for the data numeration
 df = pd.DataFrame(encoded, columns=ohe.get_feature_names_out(penguinCategories))
 
+#manual conversion of categories assuming the dataframe is created beforehand
+##df['island'] = df['island'].map({'Biscoe': 0, 'Dream': 1, 'Torgersen': 2})
+##df['sex'] = df['sex'].map({'MALE': 0, 'FEMALE': 1})
+
 # Replacing the old column and replacing it with our new dataframe
 penguins = penguins.drop(columns=penguinCategories)
 penguins = pd.concat([penguins, df], axis=1)
