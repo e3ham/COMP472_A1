@@ -12,15 +12,13 @@ from sklearn.preprocessing import OneHotEncoder
 def write_performance_metrics(classifier, X_test, y_true, y_pred, file_name):
     report = metrics.classification_report(y_true, y_pred, output_dict=True, zero_division=0)
     with open(file_name, 'a') as f:
-        f.write(f"------------------------------------------\n")
-        f.write(f"Classifier: {type(classifier).__name__}\n")
         if hasattr(classifier, 'best_params_'):
             f.write(f"Best Parameters: {classifier.best_params_}\n")
-        f.write("Confusion Matrix:\n")
+        f.write("\(B\) Confusion Matrix:\n")
         f.write(f"{metrics.confusion_matrix(y_true, y_pred)}\n")
-        f.write("Classification Report:\n")
+        f.write("\(C\) Classification Report:\n")
         f.write(f"{metrics.classification_report(y_true, y_pred, zero_division=0)}\n")
-        f.write(f"Accuracy: {metrics.accuracy_score(y_true, y_pred)}\n")
+        f.write(f"\(D\) Accuracy: {metrics.accuracy_score(y_true, y_pred)}\n")
         f.write(f"Macro Average F1 Score: {report['macro avg']['f1-score']}\n")
         f.write(f"Weighted Average F1 Score: {report['weighted avg']['f1-score']}\n\n")
 
@@ -107,14 +105,38 @@ W_train_abalone, W_test_abalone, Z_train_abalone, Z_test_abalone = train_test_sp
 baseDT_penguins = DecisionTreeClassifier(random_state=42)
 baseDT_penguins.fit(X_train_penguins, Y_train_penguins)
 Y_pred_penguins = baseDT_penguins.predict(X_test_penguins)
+report = metrics.classification_report(Y_test_penguins, Y_pred_penguins, output_dict=True, zero_division=0)
 
+#write to file
+with open("penguin-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("\(A\) Base-DT with default parameters\n")
+    f.write("\(B\) Confusion Matrix:\n")
+    f.write(f"{metrics.confusion_matrix(Y_test_penguins, Y_pred_penguins)}\n")
+    f.write("\(C\) Classification Report:\n")
+    f.write(f"{metrics.classification_report(Y_test_penguins, Y_pred_penguins, zero_division=0)}\n")
+    f.write(f"\(D\) Accuracy: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}\n")
+    f.write(f"Macro Average F1 Score: {report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {report['weighted avg']['f1-score']}\n\n")
+    
 # Base-DT for Abalone
 baseDT_abalone = DecisionTreeClassifier(random_state=42)
 baseDT_abalone.fit(W_train_abalone, Z_train_abalone)
 Z_pred_abalone = baseDT_abalone.predict(W_test_abalone)
 
+#write to file
+with open("abalone-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("\(A\) Base-DT with default parameters\n")
+    f.write("\(B\) Confusion Matrix:\n")
+    f.write(f"{metrics.confusion_matrix(Z_test_abalone, Z_pred_abalone)}\n")
+    f.write("\(C\) Classification Report:\n")
+    f.write(f"{metrics.classification_report(Z_test_abalone, Z_pred_abalone, zero_division=0)}\n")
+    f.write(f"\(D\) Accuracy: {metrics.accuracy_score(Z_test_abalone, Z_pred_abalone)}\n")
+    f.write(f"Macro Average F1 Score: {report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {report['weighted avg']['f1-score']}\n\n")
+    
 # Evaluate with write_performance_metrics and repeated_evaluation
-
 print(f"Base-DT Parameters for Penguins: {baseDT_penguins.get_params()}")
 print(f"Base-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}")
 
