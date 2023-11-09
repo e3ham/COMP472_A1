@@ -105,7 +105,7 @@ W_train_abalone, W_test_abalone, Z_train_abalone, Z_test_abalone = train_test_sp
 baseDT_penguins = DecisionTreeClassifier(random_state=42)
 baseDT_penguins.fit(X_train_penguins, Y_train_penguins)
 Y_pred_penguins = baseDT_penguins.predict(X_test_penguins)
-p_report = metrics.classification_report(Y_test_penguins, Y_pred_penguins, output_dict=True, zero_division=0)
+p_dt_report = metrics.classification_report(Y_test_penguins, Y_pred_penguins, output_dict=True, zero_division=0)
 
 #write to file
 with open("penguin-performance.txt", 'a') as f:
@@ -116,14 +116,14 @@ with open("penguin-performance.txt", 'a') as f:
     f.write("(C) Classification Report:\n")
     f.write(f"{metrics.classification_report(Y_test_penguins, Y_pred_penguins, zero_division=0)}\n")
     f.write(f"(D) Accuracy: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}\n")
-    f.write(f"Macro Average F1 Score: {p_report['macro avg']['f1-score']}\n")
-    f.write(f"Weighted Average F1 Score: {p_report['weighted avg']['f1-score']}\n\n")
+    f.write(f"Macro Average F1 Score: {p_dt_report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {p_dt_report['weighted avg']['f1-score']}\n\n")
     
 # Base-DT for Abalone
 baseDT_abalone = DecisionTreeClassifier(random_state=42)
 baseDT_abalone.fit(W_train_abalone, Z_train_abalone)
 Z_pred_abalone = baseDT_abalone.predict(W_test_abalone)
-a_report = metrics.classification_report(Z_test_abalone, Z_pred_abalone, output_dict=True, zero_division=0)
+a_dt_report = metrics.classification_report(Z_test_abalone, Z_pred_abalone, output_dict=True, zero_division=0)
 
 #write to file
 with open("abalone-performance.txt", 'a') as f:
@@ -134,8 +134,8 @@ with open("abalone-performance.txt", 'a') as f:
     f.write("(C) Classification Report:\n")
     f.write(f"{metrics.classification_report(Z_test_abalone, Z_pred_abalone, zero_division=0)}\n")
     f.write(f"(D) Accuracy: {metrics.accuracy_score(Z_test_abalone, Z_pred_abalone)}\n")
-    f.write(f"Macro Average F1 Score: {a_report['macro avg']['f1-score']}\n")
-    f.write(f"Weighted Average F1 Score: {a_report['weighted avg']['f1-score']}\n\n")
+    f.write(f"Macro Average F1 Score: {a_dt_report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {a_dt_report['weighted avg']['f1-score']}\n\n")
     
 # Evaluate with write_performance_metrics and repeated_evaluation
 print(f"Base-DT Parameters for Penguins: {baseDT_penguins.get_params()}")
@@ -212,6 +212,19 @@ base_mlp_penguins.fit(X_train_penguins, Y_train_penguins)
 Y_pred_mlp_penguins = base_mlp_penguins.predict(X_test_penguins)
 print(f"Base-MLP Parameters for Penguins: {base_mlp_penguins.get_params()}")
 print(f"Base-MLP Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_mlp_penguins)}")
+p_mlp_report = metrics.classification_report(Y_test_penguins, Y_pred_mlp_penguins, output_dict=True, zero_division=0)
+
+#write to file
+with open("penguin-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("(A) Base-MLP with default parameters\n")
+    f.write("(B) Confusion Matrix:\n")
+    f.write(f"{metrics.confusion_matrix(Y_test_penguins, Y_pred_mlp_penguins)}\n")
+    f.write("(C) Classification Report:\n")
+    f.write(f"{metrics.classification_report(Y_test_penguins, Y_pred_mlp_penguins, zero_division=0)}\n")
+    f.write(f"(D) Accuracy: {metrics.accuracy_score(Y_test_penguins, Y_pred_mlp_penguins)}\n")
+    f.write(f"Macro Average F1 Score: {p_mlp_report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {p_mlp_report['weighted avg']['f1-score']}\n\n")
 
 # Base-MLP for Abalone
 base_mlp_abalone = MLPClassifier(hidden_layer_sizes=(100, 100),
@@ -221,7 +234,20 @@ base_mlp_abalone = MLPClassifier(hidden_layer_sizes=(100, 100),
                                  random_state=None)
 base_mlp_abalone.fit(W_train_abalone, Z_train_abalone)
 Z_pred_mlp_abalone = base_mlp_abalone.predict(W_test_abalone)
+a_mlp_report = metrics.classification_report(Z_test_abalone, Z_pred_mlp_abalone, output_dict=True, zero_division=0)
 
+
+#write to file
+with open("abalone-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("(A) Base-MLP with default parameters\n")
+    f.write("(B) Confusion Matrix:\n")
+    f.write(f"{metrics.confusion_matrix(Z_test_abalone, Z_pred_mlp_abalone)}\n")
+    f.write("(C) Classification Report:\n")
+    f.write(f"{metrics.classification_report(Z_test_abalone, Z_pred_mlp_abalone, zero_division=0)}\n")
+    f.write(f"(D) Accuracy: {metrics.accuracy_score(Z_test_abalone, Z_pred_mlp_abalone)}\n")
+    f.write(f"Macro Average F1 Score: {a_mlp_report['macro avg']['f1-score']}\n")
+    f.write(f"Weighted Average F1 Score: {a_mlp_report['weighted avg']['f1-score']}\n\n")
 print(f"Base-MLP Parameters for Abalone: {base_mlp_abalone.get_params()}")
 print(f"Base-MLP Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z_pred_mlp_abalone)}")
 
@@ -245,12 +271,25 @@ grid_search_abalone_mlp.fit(W_train_abalone, Z_train_abalone)
 # Train and evaluate Top-MLP with best parameters found (Penguins)
 topMLP_penguins = grid_search_penguins_mlp.best_estimator_
 Y_pred_topMLP_penguins = topMLP_penguins.predict(X_test_penguins)
+
+#write to file
+with open("penguin-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("(A) Top-MLP with gridsearch\n")
+    f.write("Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
+    f.write(f"Best parameters: {grid_search_penguins_mlp.best_params_}")
 write_performance_metrics(topMLP_penguins, X_test_penguins, Y_test_penguins, Y_pred_topMLP_penguins, 'penguin-performance.txt')
 repeated_evaluation(topMLP_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
 
 # Train and evaluate Top-MLP with best parameters found (Abalone)
 topMLP_abalone = grid_search_abalone_mlp.best_estimator_
 Y_pred_topMLP_abalone = topMLP_abalone.predict(W_test_abalone)
+
+with open("abalone-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("(A) Top-MLP with gridsearch\n")
+    f.write("Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
+    f.write(f"Best parameters: {grid_search_abalone_mlp.best_params_}")
 write_performance_metrics(topMLP_abalone, W_test_abalone, Z_test_abalone, Y_pred_topMLP_abalone, 'abalone-performance.txt')
 repeated_evaluation(topMLP_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
 
