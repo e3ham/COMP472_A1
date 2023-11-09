@@ -255,3 +255,80 @@ Variance in Macro F1 Score: 0.0020667938983075663
 Average Weighted F1 Score: 0.5016231598755835
 Variance in Weighted F1 Score: 0.0019409806261898785
 
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[136  42 155]
+ [ 49 206  75]
+ [158  62 162]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.40      0.41      0.40       333
+           I       0.66      0.62      0.64       330
+           M       0.41      0.42      0.42       382
+
+    accuracy                           0.48      1045
+   macro avg       0.49      0.49      0.49      1045
+weighted avg       0.49      0.48      0.48      1045
+
+(D) Accuracy: 0.48229665071770333
+Macro Average F1 Score: 0.48824050502270544
+Weighted Average F1 Score: 0.48452884442551153
+
+(B) Confusion Matrix:
+[[122  47 164]
+ [ 43 238  49]
+ [157  71 154]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.38      0.37      0.37       333
+           I       0.67      0.72      0.69       330
+           M       0.42      0.40      0.41       382
+
+    accuracy                           0.49      1045
+   macro avg       0.49      0.50      0.49      1045
+weighted avg       0.49      0.49      0.49      1045
+
+(D) Accuracy: 0.49186602870813395
+Macro Average F1 Score: 0.4925371960869673
+Weighted Average F1 Score: 0.4881459894240186
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.5196172248803828
+Variance in Accuracy: 0.00026702685378081944
+Average Macro F1 Score: 0.5170580143385011
+Variance in Macro F1 Score: 0.0003460175312505487
+Average Weighted F1 Score: 0.515687579910469
+Variance in Weighted F1 Score: 0.0003840373352107509
+
+(B) Confusion Matrix:
+[[112  41 180]
+ [ 16 247  67]
+ [108  71 203]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.47      0.34      0.39       333
+           I       0.69      0.75      0.72       330
+           M       0.45      0.53      0.49       382
+
+    accuracy                           0.54      1045
+   macro avg       0.54      0.54      0.53      1045
+weighted avg       0.53      0.54      0.53      1045
+
+(D) Accuracy: 0.5377990430622009
+Macro Average F1 Score: 0.5328783373422677
+Weighted Average F1 Score: 0.5302445677521597
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5391387559808611
+Variance in Accuracy: 0.00048628923330509816
+Average Macro F1 Score: 0.5009211005567572
+Variance in Macro F1 Score: 0.0020667938983075663
+Average Weighted F1 Score: 0.5016231598755835
+Variance in Weighted F1 Score: 0.0019409806261898785
+
