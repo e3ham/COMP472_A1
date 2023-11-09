@@ -1,4 +1,3 @@
-import imageio.v2 as imageio
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,6 +5,7 @@ from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier, plot_tree
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 
 # Function to write performance metrics to a file
@@ -21,6 +21,7 @@ def write_performance_metrics(classifier, X_test, y_true, y_pred, file_name):
         f.write(f"(D) Accuracy: {metrics.accuracy_score(y_true, y_pred)}\n")
         f.write(f"Macro Average F1 Score: {report['macro avg']['f1-score']}\n")
         f.write(f"Weighted Average F1 Score: {report['weighted avg']['f1-score']}\n\n")
+
 
 # Function for repeated evaluation
 def repeated_evaluation(classifier, X, y, file_name, n_runs=5):
@@ -47,6 +48,7 @@ def repeated_evaluation(classifier, X, y, file_name, n_runs=5):
         f.write(f"Average Weighted F1 Score: {np.mean(f1_weighted_scores)}\n")
         f.write(f"Variance in Weighted F1 Score: {np.var(f1_weighted_scores)}\n\n")
 
+
 # Reading the CSV files
 abalone = pd.read_csv("abalone.csv")
 penguins = pd.read_csv("penguins.csv")
@@ -59,7 +61,7 @@ encoded = ohe.fit_transform(penguins[penguinCategories])
 # Creating a dataframe for the data numeration
 df = pd.DataFrame(encoded, columns=ohe.get_feature_names_out(penguinCategories))
 
-#manual conversion of categories assuming the dataframe is created beforehand
+# manual conversion of categories assuming the dataframe is created beforehand
 ##df['island'] = df['island'].map({'Biscoe': 0, 'Dream': 1, 'Torgersen': 2})
 ##df['sex'] = df['sex'].map({'MALE': 0, 'FEMALE': 1})
 
@@ -68,10 +70,11 @@ penguins = penguins.drop(columns=penguinCategories)
 penguins = pd.concat([penguins, df], axis=1)
 # print(penguins)
 
-# without using SKLearn (only pandas):
-# penguins = pd.read_csv("penguins.csv")
-# penguins = pd.get_dummies(penguins, columns=['island', 'sex'])
-# print(penguins)
+# without using OHE:
+# penguins['island'] = penguins['island'].astype('category')
+# penguins['sex'] = penguins['sex'].astype('category')
+# penguins['island'] = penguins['island'].cat.codes
+# penguins['sex'] = penguins['sex'].cat.codes
 
 # Getting the percentages needed for plotting graphs
 percentagesPenguins = penguins["species"].value_counts(normalize=True) * 100
@@ -85,8 +88,8 @@ plt.ylabel("Percentage")
 plt.savefig("penguin-classes.png")
 
 plt.figure(figsize=(8, 6))
-percentagesPenguins.plot(kind="bar", color='green')
-plt.title("Percentages of instances for each type of abalone")
+percentagesAbalone.plot(kind="bar", color='green')
+plt.title("Percentages of instances for each sex of abalone")
 plt.xlabel("Type")
 plt.ylabel("Percentage")
 plt.savefig("abalone-classes.png")
@@ -94,12 +97,14 @@ plt.savefig("abalone-classes.png")
 # Data splitting for both datasets
 X_penguins = penguins.drop(columns=["species"])
 Y_penguins = penguins["species"]
-X_train_penguins, X_test_penguins, Y_train_penguins, Y_test_penguins = train_test_split(X_penguins, Y_penguins, random_state=42)
+X_train_penguins, X_test_penguins, Y_train_penguins, Y_test_penguins = train_test_split(X_penguins, Y_penguins,
+                                                                                        random_state=42)
 
 # Update the dataset splitting to reflect the new one-hot encoded features
 W_abalone = abalone.drop(columns=["Type"])
 Z_abalone = abalone["Type"]
-W_train_abalone, W_test_abalone, Z_train_abalone, Z_test_abalone = train_test_split(W_abalone, Z_abalone, random_state=42)
+W_train_abalone, W_test_abalone, Z_train_abalone, Z_test_abalone = train_test_split(W_abalone, Z_abalone,
+                                                                                    random_state=42)
 
 # Base-DT for Penguins
 baseDT_penguins = DecisionTreeClassifier(random_state=42)
@@ -107,7 +112,7 @@ baseDT_penguins.fit(X_train_penguins, Y_train_penguins)
 Y_pred_penguins = baseDT_penguins.predict(X_test_penguins)
 p_dt_report = metrics.classification_report(Y_test_penguins, Y_pred_penguins, output_dict=True, zero_division=0)
 
-#write to file
+# write to file
 with open("penguin-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Base-DT with default parameters\n")
@@ -118,14 +123,14 @@ with open("penguin-performance.txt", 'a') as f:
     f.write(f"(D) Accuracy: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}\n")
     f.write(f"Macro Average F1 Score: {p_dt_report['macro avg']['f1-score']}\n")
     f.write(f"Weighted Average F1 Score: {p_dt_report['weighted avg']['f1-score']}\n\n")
-    
+
 # Base-DT for Abalone
 baseDT_abalone = DecisionTreeClassifier(random_state=42)
 baseDT_abalone.fit(W_train_abalone, Z_train_abalone)
 Z_pred_abalone = baseDT_abalone.predict(W_test_abalone)
 a_dt_report = metrics.classification_report(Z_test_abalone, Z_pred_abalone, output_dict=True, zero_division=0)
 
-#write to file
+# write to file
 with open("abalone-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Base-DT with default parameters\n")
@@ -136,7 +141,7 @@ with open("abalone-performance.txt", 'a') as f:
     f.write(f"(D) Accuracy: {metrics.accuracy_score(Z_test_abalone, Z_pred_abalone)}\n")
     f.write(f"Macro Average F1 Score: {a_dt_report['macro avg']['f1-score']}\n")
     f.write(f"Weighted Average F1 Score: {a_dt_report['weighted avg']['f1-score']}\n\n")
-    
+
 # Evaluate with write_performance_metrics and repeated_evaluation
 print(f"Base-DT Parameters for Penguins: {baseDT_penguins.get_params()}")
 print(f"Base-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}")
@@ -164,36 +169,40 @@ grid_search_abalone_dt.fit(W_train_abalone, Z_train_abalone)
 topDT_penguins = grid_search_penguins_dt.best_estimator_
 Y_pred_topDT_penguins = topDT_penguins.predict(X_test_penguins)
 
-#write to file
+# write to file
 with open("penguin-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Top-DT with gridsearch\n")
     f.write("Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]\n")
     f.write(f"Best parameters: {grid_search_penguins_dt.best_params_}")
-write_performance_metrics(topDT_penguins, X_test_penguins, Y_test_penguins, Y_pred_topDT_penguins, 'penguin-performance.txt')
+write_performance_metrics(topDT_penguins, X_test_penguins, Y_test_penguins, Y_pred_topDT_penguins,
+                          'penguin-performance.txt')
 repeated_evaluation(topDT_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
 
 # Train and evaluate Top-DT with best parameters found (Abalone)
 topDT_abalone = grid_search_abalone_dt.best_estimator_
 Y_pred_topDT_abalone = topDT_abalone.predict(W_test_abalone)
 
-#write to file
+# write to file
 with open("abalone-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Top-DT with gridsearch\n")
     f.write("Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]\n")
     f.write(f"Best parameters: {grid_search_abalone_dt.best_params_}")
-write_performance_metrics(topDT_abalone, W_test_abalone, Z_test_abalone, Y_pred_topDT_abalone, 'abalone-performance.txt')
+write_performance_metrics(topDT_abalone, W_test_abalone, Z_test_abalone, Y_pred_topDT_abalone,
+                          'abalone-performance.txt')
 repeated_evaluation(topDT_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
 
 # Decision tree visualization for Penguins
-plt.figure(figsize=(20,10))
-plot_tree(topDT_penguins, filled=True, feature_names=X_train_penguins.columns, class_names=['Adelie', 'Chinstrap', 'Gentoo'])
+plt.figure(figsize=(20, 10))
+plot_tree(topDT_penguins, filled=True, feature_names=X_train_penguins.columns,
+          class_names=['Adelie', 'Chinstrap', 'Gentoo'])
 plt.savefig('penguins_tree.png')
 
 # Decision tree visualization for Abalone (with limited depth for visualization purposes)
-plt.figure(figsize=(20,10))
-plot_tree(topDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'], max_depth=3)
+plt.figure(figsize=(20, 10))
+plot_tree(topDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'],
+          max_depth=3)
 plt.savefig('abalone_tree.png')
 
 print(f"Top-DT Best Parameters for Penguins: {grid_search_penguins_dt.best_params_}")
@@ -214,7 +223,7 @@ print(f"Base-MLP Parameters for Penguins: {base_mlp_penguins.get_params()}")
 print(f"Base-MLP Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_mlp_penguins)}")
 p_mlp_report = metrics.classification_report(Y_test_penguins, Y_pred_mlp_penguins, output_dict=True, zero_division=0)
 
-#write to file
+# write to file
 with open("penguin-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Base-MLP with default parameters\n")
@@ -236,8 +245,7 @@ base_mlp_abalone.fit(W_train_abalone, Z_train_abalone)
 Z_pred_mlp_abalone = base_mlp_abalone.predict(W_test_abalone)
 a_mlp_report = metrics.classification_report(Z_test_abalone, Z_pred_mlp_abalone, output_dict=True, zero_division=0)
 
-
-#write to file
+# write to file
 with open("abalone-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Base-MLP with default parameters\n")
@@ -256,7 +264,7 @@ mlp_param_grid = {
     'hidden_layer_sizes': [(30, 50), (10, 10, 10)],
     'activation': ['logistic', 'tanh', 'relu'],
 
-# In scikit-learn, the 'logistic' activation function is equivalent to the sigmoid function.
+    # In scikit-learn, the 'logistic' activation function is equivalent to the sigmoid function.
     'solver': ['adam', 'sgd'],
 }
 
@@ -272,13 +280,15 @@ grid_search_abalone_mlp.fit(W_train_abalone, Z_train_abalone)
 topMLP_penguins = grid_search_penguins_mlp.best_estimator_
 Y_pred_topMLP_penguins = topMLP_penguins.predict(X_test_penguins)
 
-#write to file
+# write to file
 with open("penguin-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Top-MLP with gridsearch\n")
-    f.write("Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
+    f.write(
+        "Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
     f.write(f"Best parameters: {grid_search_penguins_mlp.best_params_}")
-write_performance_metrics(topMLP_penguins, X_test_penguins, Y_test_penguins, Y_pred_topMLP_penguins, 'penguin-performance.txt')
+write_performance_metrics(topMLP_penguins, X_test_penguins, Y_test_penguins, Y_pred_topMLP_penguins,
+                          'penguin-performance.txt')
 repeated_evaluation(topMLP_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
 
 # Train and evaluate Top-MLP with best parameters found (Abalone)
@@ -288,9 +298,11 @@ Y_pred_topMLP_abalone = topMLP_abalone.predict(W_test_abalone)
 with open("abalone-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Top-MLP with gridsearch\n")
-    f.write("Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
+    f.write(
+        "Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]\n")
     f.write(f"Best parameters: {grid_search_abalone_mlp.best_params_}")
-write_performance_metrics(topMLP_abalone, W_test_abalone, Z_test_abalone, Y_pred_topMLP_abalone, 'abalone-performance.txt')
+write_performance_metrics(topMLP_abalone, W_test_abalone, Z_test_abalone, Y_pred_topMLP_abalone,
+                          'abalone-performance.txt')
 repeated_evaluation(topMLP_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
 
 print(f"Top-MLP Best Parameters for Penguins: {grid_search_penguins_mlp.best_params_}")
