@@ -1,0 +1,60 @@
+------------------------------------------
+Classifier: DecisionTreeClassifier
+Confusion Matrix:
+[[39  1  0]
+ [ 1 14  0]
+ [ 0  0 29]]
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.97      0.97      0.97        40
+   Chinstrap       0.93      0.93      0.93        15
+      Gentoo       1.00      1.00      1.00        29
+
+    accuracy                           0.98        84
+   macro avg       0.97      0.97      0.97        84
+weighted avg       0.98      0.98      0.98        84
+
+Accuracy: 0.9761904761904762
+Macro Average F1 Score: 0.9694444444444444
+Weighted Average F1 Score: 0.9761904761904762
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9738095238095237
+Variance in Accuracy: 0.0003061224489795924
+Average Macro F1 Score: 0.9699433816563575
+Variance in Macro F1 Score: 0.00029533069698433744
+Average Weighted F1 Score: 0.9736363236446548
+Variance in Weighted F1 Score: 0.00031024795510347107
+
+------------------------------------------
+Classifier: MLPClassifier
+Confusion Matrix:
+[[32  0  8]
+ [15  0  0]
+ [ 3  0 26]]
+Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.64      0.80      0.71        40
+   Chinstrap       0.00      0.00      0.00        15
+      Gentoo       0.76      0.90      0.83        29
+
+    accuracy                           0.69        84
+   macro avg       0.47      0.57      0.51        84
+weighted avg       0.57      0.69      0.62        84
+
+Accuracy: 0.6904761904761905
+Macro Average F1 Score: 0.5121693121693122
+Weighted Average F1 Score: 0.6235827664399093
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.6285714285714287
+Variance in Accuracy: 0.034546485260770976
+Average Macro F1 Score: 0.5395233868003381
+Variance in Macro F1 Score: 0.06598100821549986
+Average Weighted F1 Score: 0.5659296366276307
+Variance in Weighted F1 Score: 0.06058046253981484
+
