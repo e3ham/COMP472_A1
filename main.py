@@ -1,9 +1,53 @@
+import imageio.v2 as imageio
+import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn import metrics
 from sklearn.tree import DecisionTreeClassifier, plot_tree
-from sklearn.model_selection import train_test_split
+from sklearn.neural_network import MLPClassifier
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import OneHotEncoder
+
+# Function to write performance metrics to a file
+def write_performance_metrics(classifier, X_test, y_true, y_pred, file_name):
+    report = metrics.classification_report(y_true, y_pred, output_dict=True, zero_division=0)
+    with open(file_name, 'a') as f:
+        f.write(f"------------------------------------------\n")
+        f.write(f"Classifier: {type(classifier).__name__}\n")
+        if hasattr(classifier, 'best_params_'):
+            f.write(f"Best Parameters: {classifier.best_params_}\n")
+        f.write("Confusion Matrix:\n")
+        f.write(f"{metrics.confusion_matrix(y_true, y_pred)}\n")
+        f.write("Classification Report:\n")
+        f.write(f"{metrics.classification_report(y_true, y_pred, zero_division=0)}\n")
+        f.write(f"Accuracy: {metrics.accuracy_score(y_true, y_pred)}\n")
+        f.write(f"Macro Average F1 Score: {report['macro avg']['f1-score']}\n")
+        f.write(f"Weighted Average F1 Score: {report['weighted avg']['f1-score']}\n\n")
+
+# Function for repeated evaluation
+def repeated_evaluation(classifier, X, y, file_name, n_runs=5):
+    accuracy_scores = []
+    f1_macro_scores = []
+    f1_weighted_scores = []
+
+    for i in range(n_runs):
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=i)
+        classifier.fit(X_train, y_train)
+        y_pred = classifier.predict(X_test)
+        accuracy_scores.append(metrics.accuracy_score(y_test, y_pred))
+        f1_macro_scores.append(metrics.f1_score(y_test, y_pred, average='macro'))
+        f1_weighted_scores.append(metrics.f1_score(y_test, y_pred, average='weighted'))
+
+    # Write the average and variance of the scores to the file
+    with open(file_name, 'a') as f:
+        f.write(f"------------------------------------------\n")
+        f.write(f"Repeated Evaluation for {type(classifier).__name__}\n")
+        f.write(f"Average Accuracy: {np.mean(accuracy_scores)}\n")
+        f.write(f"Variance in Accuracy: {np.var(accuracy_scores)}\n")
+        f.write(f"Average Macro F1 Score: {np.mean(f1_macro_scores)}\n")
+        f.write(f"Variance in Macro F1 Score: {np.var(f1_macro_scores)}\n")
+        f.write(f"Average Weighted F1 Score: {np.mean(f1_weighted_scores)}\n")
+        f.write(f"Variance in Weighted F1 Score: {np.var(f1_weighted_scores)}\n\n")
 
 # Reading the CSV files
 abalone = pd.read_csv("abalone.csv")
@@ -45,83 +89,132 @@ plt.xlabel("Type")
 plt.ylabel("Percentage")
 plt.savefig("abalone-classes.png")
 
-# Splitting the dataset in order to test them on our models
-X = penguins.drop(columns=["species"])
-Y = penguins["species"]
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, random_state=42)
-# print("X_train shape:", X_train.shape)
-# print("X_test shape:", X_test.shape)
-# print("Y_train shape:", Y_train.shape)
-# print("Y_test shape:", Y_test.shape)
+# Data splitting for both datasets
+X_penguins = penguins.drop(columns=["species"])
+Y_penguins = penguins["species"]
+X_train_penguins, X_test_penguins, Y_train_penguins, Y_test_penguins = train_test_split(X_penguins, Y_penguins, random_state=42)
 
-W = abalone.drop(columns=["Type"])
-Z = abalone["Type"]
-W_train, W_test, Z_train, Z_test = train_test_split(W, Z, random_state=42)
-# print("W_train shape:", W_train.shape)
-# print("W_test shape:", W_test.shape)
-# print("Z_train shape:", Z_train.shape)
-# print("X_test shape:", Z_test.shape)
+# Update the dataset splitting to reflect the new one-hot encoded features
+W_abalone = abalone.drop(columns=["Type"])
+Z_abalone = abalone["Type"]
+W_train_abalone, W_test_abalone, Z_train_abalone, Z_test_abalone = train_test_split(W_abalone, Z_abalone, random_state=42)
 
-# Testing on the base decision tree and plotting it graphically (max depth for abalone)
-baseDT_penguins = DecisionTreeClassifier()
-baseDT_penguins.fit(X_train, Y_train)
-Y_pred = baseDT_penguins.predict(X_test)
-plt.figure(figsize=(12, 8))
-plot_tree(baseDT_penguins, filled=True, feature_names=X.columns, class_names=baseDT_penguins.classes_, rounded=True)
-plt.title("Penguins Decision Tree Visualization")
-plt.show()
-print("Accuracy:", metrics.accuracy_score(Y_test, Y_pred))
+# Base-DT for Penguins
+baseDT_penguins = DecisionTreeClassifier(random_state=42)
+baseDT_penguins.fit(X_train_penguins, Y_train_penguins)
+Y_pred_penguins = baseDT_penguins.predict(X_test_penguins)
 
-baseDT_abalone = DecisionTreeClassifier(max_depth=5)
-baseDT_abalone.fit(W_train, Z_train)
-Z_pred = baseDT_abalone.predict(W_test)
-plt.figure(figsize=(12, 8))
-plot_tree(baseDT_abalone, filled=True, feature_names=X.columns, class_names=baseDT_abalone.classes_, rounded=True)
-plt.title("Abalone Decision Tree Visualization")
-plt.show()
-print("Accuracy:", metrics.accuracy_score(Z_test, Z_pred))
+# Base-DT for Abalone
+baseDT_abalone = DecisionTreeClassifier(random_state=42)
+baseDT_abalone.fit(W_train_abalone, Z_train_abalone)
+Z_pred_abalone = baseDT_abalone.predict(W_test_abalone)
 
-# Different values for the gridsearch tree
-max_depth_vals = [2, 5, None]
-min_samples_split_vals = [3, 6, 10]
-criterion_vals = ["gini", "entropy"]
+# Evaluate with write_performance_metrics and repeated_evaluation
 
-# Picking through the different values and testing the penguins dataset
-for criterion in criterion_vals:
-    for max_depth in max_depth_vals:
-        for min_samples_split in min_samples_split_vals:
-            topDT_penguins = DecisionTreeClassifier(criterion=criterion, max_depth=max_depth,
-                                                    min_samples_split=min_samples_split, random_state=42)
-            topDT_penguins.fit(X_train, Y_train)
+print(f"Base-DT Parameters for Penguins: {baseDT_penguins.get_params()}")
+print(f"Base-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_penguins)}")
 
-            plt.figure(figsize=(10, 6))
-            plot_tree(
-                topDT_penguins,
-                filled=True,
-                feature_names=X.columns,
-                class_names=topDT_penguins.classes_,
-                rounded=True
-            )
-            plt.title(
-                f"Penguins Decision Tree (Criterion: {criterion}, Max Depth: {max_depth}, Min Samples Split: {min_samples_split})")
-            plt.show()
+# After training and evaluation for Base-DT (Abalone)
+print(f"Base-DT Parameters for Abalone: {baseDT_abalone.get_params()}")
+print(f"Base-DT Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z_pred_abalone)}")
 
-# Picking through the different values and testing the abalone dataset
-for criterion in criterion_vals:
-    for max_depth in max_depth_vals:
-        for min_samples_split in min_samples_split_vals:
-            topDT_abalone = DecisionTreeClassifier(criterion=criterion, max_depth=max_depth,
-                                                   min_samples_split=min_samples_split, random_state=42)
-            topDT_abalone.fit(X_train, Y_train)
+# Define the hyperparameters grid for Top-DT
+dt_param_grid = {
+    'criterion': ['gini', 'entropy'],
+    'max_depth': [None, 10, 20],  # None means unlimited
+    'min_samples_split': [2, 4, 6]
+}
 
-            plt.figure(figsize=(10, 6))
-            plot_tree(
-                topDT_abalone,
-                filled=True,
-                feature_names=X.columns,
-                class_names=topDT_abalone.classes_,
-                rounded=True
-            )
-            plt.title(f"Abalone Decision Tree (Criterion: {criterion}, Max Depth: {max_depth}, "
-                      f"Min Samples Split: {min_samples_split})")
-            plt.show()
+# Perform grid search for Top-DT (Penguins)
+grid_search_penguins_dt = GridSearchCV(DecisionTreeClassifier(random_state=42), dt_param_grid, cv=5)
+grid_search_penguins_dt.fit(X_train_penguins, Y_train_penguins)
+
+# Perform grid search for Top-DT (Abalone)
+grid_search_abalone_dt = GridSearchCV(DecisionTreeClassifier(random_state=42), dt_param_grid, cv=5)
+grid_search_abalone_dt.fit(W_train_abalone, Z_train_abalone)
+
+# Train and evaluate Top-DT with best parameters found (Penguins)
+topDT_penguins = grid_search_penguins_dt.best_estimator_
+Y_pred_topDT_penguins = topDT_penguins.predict(X_test_penguins)
+write_performance_metrics(topDT_penguins, X_test_penguins, Y_test_penguins, Y_pred_topDT_penguins, 'penguin-performance.txt')
+repeated_evaluation(topDT_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
+
+# Train and evaluate Top-DT with best parameters found (Abalone)
+topDT_abalone = grid_search_abalone_dt.best_estimator_
+Y_pred_topDT_abalone = topDT_abalone.predict(W_test_abalone)
+write_performance_metrics(topDT_abalone, W_test_abalone, Z_test_abalone, Y_pred_topDT_abalone, 'abalone-performance.txt')
+repeated_evaluation(topDT_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
+
+# Decision tree visualization for Penguins
+plt.figure(figsize=(20,10))
+plot_tree(topDT_penguins, filled=True, feature_names=X_train_penguins.columns, class_names=['Adelie', 'Chinstrap', 'Gentoo'])
+plt.savefig('penguins_tree.png')
+
+# Decision tree visualization for Abalone (with limited depth for visualization purposes)
+plt.figure(figsize=(20,10))
+plot_tree(topDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'], max_depth=3)
+plt.savefig('abalone_tree.png')
+
+print(f"Top-DT Best Parameters for Penguins: {grid_search_penguins_dt.best_params_}")
+print(f"Top-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_topDT_penguins)}")
+
+print(f"Top-DT Best Parameters for Abalone: {grid_search_abalone_dt.best_params_}")
+print(f"Top-DT Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Y_pred_topDT_abalone)}")
+
+# Base-MLP for Penguins
+base_mlp_penguins = MLPClassifier(hidden_layer_sizes=(100, 100),
+                                  activation='logistic',
+                                  solver='sgd',
+                                  max_iter=200,
+                                  random_state=None)
+base_mlp_penguins.fit(X_train_penguins, Y_train_penguins)
+Y_pred_mlp_penguins = base_mlp_penguins.predict(X_test_penguins)
+print(f"Base-MLP Parameters for Penguins: {base_mlp_penguins.get_params()}")
+print(f"Base-MLP Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_mlp_penguins)}")
+
+# Base-MLP for Abalone
+base_mlp_abalone = MLPClassifier(hidden_layer_sizes=(100, 100),
+                                 activation='logistic',
+                                 solver='sgd',
+                                 max_iter=200,
+                                 random_state=None)
+base_mlp_abalone.fit(W_train_abalone, Z_train_abalone)
+Z_pred_mlp_abalone = base_mlp_abalone.predict(W_test_abalone)
+
+print(f"Base-MLP Parameters for Abalone: {base_mlp_abalone.get_params()}")
+print(f"Base-MLP Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z_pred_mlp_abalone)}")
+
+# Define the hyperparameters grid for Top-MLP
+mlp_param_grid = {
+    'hidden_layer_sizes': [(30, 50), (10, 10, 10)],
+    'activation': ['logistic', 'tanh', 'relu'],
+
+# In scikit-learn, the 'logistic' activation function is equivalent to the sigmoid function.
+    'solver': ['adam', 'sgd'],
+}
+
+# Perform grid search for Top-MLP (Penguins)
+grid_search_penguins_mlp = GridSearchCV(MLPClassifier(random_state=42), mlp_param_grid, cv=5)
+grid_search_penguins_mlp.fit(X_train_penguins, Y_train_penguins)
+
+# Perform grid search for Top-MLP (Abalone)
+grid_search_abalone_mlp = GridSearchCV(MLPClassifier(random_state=42), mlp_param_grid, cv=5)
+grid_search_abalone_mlp.fit(W_train_abalone, Z_train_abalone)
+
+# Train and evaluate Top-MLP with best parameters found (Penguins)
+topMLP_penguins = grid_search_penguins_mlp.best_estimator_
+Y_pred_topMLP_penguins = topMLP_penguins.predict(X_test_penguins)
+write_performance_metrics(topMLP_penguins, X_test_penguins, Y_test_penguins, Y_pred_topMLP_penguins, 'penguin-performance.txt')
+repeated_evaluation(topMLP_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
+
+# Train and evaluate Top-MLP with best parameters found (Abalone)
+topMLP_abalone = grid_search_abalone_mlp.best_estimator_
+Y_pred_topMLP_abalone = topMLP_abalone.predict(W_test_abalone)
+write_performance_metrics(topMLP_abalone, W_test_abalone, Z_test_abalone, Y_pred_topMLP_abalone, 'abalone-performance.txt')
+repeated_evaluation(topMLP_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
+
+print(f"Top-MLP Best Parameters for Penguins: {grid_search_penguins_mlp.best_params_}")
+print(f"Top-MLP Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_topMLP_penguins)}")
+
+print(f"Top-MLP Best Parameters for Abalone: {grid_search_abalone_mlp.best_params_}")
+print(f"Top-MLP Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Y_pred_topMLP_abalone)}")
