@@ -163,17 +163,26 @@ grid_search_abalone_dt.fit(W_train_abalone, Z_train_abalone)
 # Train and evaluate Top-DT with best parameters found (Penguins)
 topDT_penguins = grid_search_penguins_dt.best_estimator_
 Y_pred_topDT_penguins = topDT_penguins.predict(X_test_penguins)
+
 #write to file
 with open("penguin-performance.txt", 'a') as f:
     f.write(f"------------------------------------------\n")
     f.write("(A) Top-DT with gridsearch\n")
-    f.write("")
+    f.write("Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]\n")
+    f.write(f"Best parameters: {grid_search_penguins_dt.best_params_}")
 write_performance_metrics(topDT_penguins, X_test_penguins, Y_test_penguins, Y_pred_topDT_penguins, 'penguin-performance.txt')
 repeated_evaluation(topDT_penguins, X_penguins, Y_penguins, 'penguin-performance.txt')
 
 # Train and evaluate Top-DT with best parameters found (Abalone)
 topDT_abalone = grid_search_abalone_dt.best_estimator_
 Y_pred_topDT_abalone = topDT_abalone.predict(W_test_abalone)
+
+#write to file
+with open("abalone-performance.txt", 'a') as f:
+    f.write(f"------------------------------------------\n")
+    f.write("(A) Top-DT with gridsearch\n")
+    f.write("Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]\n")
+    f.write(f"Best parameters: {grid_search_abalone_dt.best_params_}")
 write_performance_metrics(topDT_abalone, W_test_abalone, Z_test_abalone, Y_pred_topDT_abalone, 'abalone-performance.txt')
 repeated_evaluation(topDT_abalone, W_abalone, Z_abalone, 'abalone-performance.txt')
 
