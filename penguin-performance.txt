@@ -1,0 +1,520 @@
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[28  1  1]
+ [ 0 20  0]
+ [ 2  0 32]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.93      0.93      0.93        30
+   Chinstrap       0.95      1.00      0.98        20
+      Gentoo       0.97      0.94      0.96        34
+
+    accuracy                           0.95        84
+   macro avg       0.95      0.96      0.95        84
+weighted avg       0.95      0.95      0.95        84
+
+(D) Accuracy: 0.9523809523809523
+Macro Average F1 Score: 0.9547223233426365
+Weighted Average F1 Score: 0.9522596078839253
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}(B) Confusion Matrix:
+[[28  1  1]
+ [ 0 20  0]
+ [ 2  0 32]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.93      0.93      0.93        30
+   Chinstrap       0.95      1.00      0.98        20
+      Gentoo       0.97      0.94      0.96        34
+
+    accuracy                           0.95        84
+   macro avg       0.95      0.96      0.95        84
+weighted avg       0.95      0.95      0.95        84
+
+(D) Accuracy: 0.9523809523809523
+Macro Average F1 Score: 0.9547223233426365
+Weighted Average F1 Score: 0.9522596078839253
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9690476190476192
+Variance in Accuracy: 0.00048752834467120183
+Average Macro F1 Score: 0.9653756537237854
+Variance in Macro F1 Score: 0.0005276045691103596
+Average Weighted F1 Score: 0.9690582883302612
+Variance in Weighted F1 Score: 0.00048530708274106203
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[30  0  0]
+ [20  0  0]
+ [34  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.36      1.00      0.53        30
+   Chinstrap       0.00      0.00      0.00        20
+      Gentoo       0.00      0.00      0.00        34
+
+    accuracy                           0.36        84
+   macro avg       0.12      0.33      0.18        84
+weighted avg       0.13      0.36      0.19        84
+
+(D) Accuracy: 0.35714285714285715
+Macro Average F1 Score: 0.17543859649122806
+Weighted Average F1 Score: 0.18796992481203006
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[30  0  0]
+ [20  0  0]
+ [34  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.36      1.00      0.53        30
+   Chinstrap       0.00      0.00      0.00        20
+      Gentoo       0.00      0.00      0.00        34
+
+    accuracy                           0.36        84
+   macro avg       0.12      0.33      0.18        84
+weighted avg       0.13      0.36      0.19        84
+
+(D) Accuracy: 0.35714285714285715
+Macro Average F1 Score: 0.17543859649122806
+Weighted Average F1 Score: 0.18796992481203006
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5166666666666667
+Variance in Accuracy: 0.013015873015873019
+Average Macro F1 Score: 0.27604196920123686
+Variance in Macro F1 Score: 0.017388516124026747
+Average Weighted F1 Score: 0.36950592708505214
+Variance in Weighted F1 Score: 0.02496084871337708
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[29  3  0]
+ [ 1 16  0]
+ [ 0  1 34]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.97      0.91      0.94        32
+   Chinstrap       0.80      0.94      0.86        17
+      Gentoo       1.00      0.97      0.99        35
+
+    accuracy                           0.94        84
+   macro avg       0.92      0.94      0.93        84
+weighted avg       0.95      0.94      0.94        84
+
+(D) Accuracy: 0.9404761904761905
+Macro Average F1 Score: 0.9286186607364728
+Weighted Average F1 Score: 0.9420350023435576
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 4}(B) Confusion Matrix:
+[[29  3  0]
+ [ 1 16  0]
+ [ 0  1 34]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.97      0.91      0.94        32
+   Chinstrap       0.80      0.94      0.86        17
+      Gentoo       1.00      0.97      0.99        35
+
+    accuracy                           0.94        84
+   macro avg       0.92      0.94      0.93        84
+weighted avg       0.95      0.94      0.94        84
+
+(D) Accuracy: 0.9404761904761905
+Macro Average F1 Score: 0.9286186607364728
+Weighted Average F1 Score: 0.9420350023435576
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9619047619047618
+Variance in Accuracy: 0.0006462585034013614
+Average Macro F1 Score: 0.9567481074777392
+Variance in Macro F1 Score: 0.0007324820150180069
+Average Weighted F1 Score: 0.9619260578231754
+Variance in Weighted F1 Score: 0.0006499518872764629
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[32  0  0]
+ [17  0  0]
+ [35  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.38      1.00      0.55        32
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.00      0.00      0.00        35
+
+    accuracy                           0.38        84
+   macro avg       0.13      0.33      0.18        84
+weighted avg       0.15      0.38      0.21        84
+
+(D) Accuracy: 0.38095238095238093
+Macro Average F1 Score: 0.1839080459770115
+Weighted Average F1 Score: 0.21018062397372742
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[32  0  0]
+ [17  0  0]
+ [35  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.38      1.00      0.55        32
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.00      0.00      0.00        35
+
+    accuracy                           0.38        84
+   macro avg       0.13      0.33      0.18        84
+weighted avg       0.15      0.38      0.21        84
+
+(D) Accuracy: 0.38095238095238093
+Macro Average F1 Score: 0.1839080459770115
+Weighted Average F1 Score: 0.21018062397372742
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.580952380952381
+Variance in Accuracy: 0.015045351473922908
+Average Macro F1 Score: 0.3524707298754343
+Variance in Macro F1 Score: 0.027766622315799783
+Average Weighted F1 Score: 0.44459199249915216
+Variance in Weighted F1 Score: 0.026164955908081433
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[40  1  0]
+ [ 5 12  0]
+ [ 0  0 26]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.89      0.98      0.93        41
+   Chinstrap       0.92      0.71      0.80        17
+      Gentoo       1.00      1.00      1.00        26
+
+    accuracy                           0.93        84
+   macro avg       0.94      0.89      0.91        84
+weighted avg       0.93      0.93      0.93        84
+
+(D) Accuracy: 0.9285714285714286
+Macro Average F1 Score: 0.910077519379845
+Weighted Average F1 Score: 0.92547065337763
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 2}(B) Confusion Matrix:
+[[40  0  1]
+ [ 5 12  0]
+ [ 0  0 26]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.89      0.98      0.93        41
+   Chinstrap       1.00      0.71      0.83        17
+      Gentoo       0.96      1.00      0.98        26
+
+    accuracy                           0.93        84
+   macro avg       0.95      0.89      0.91        84
+weighted avg       0.93      0.93      0.93        84
+
+(D) Accuracy: 0.9285714285714286
+Macro Average F1 Score: 0.9129836135025949
+Weighted Average F1 Score: 0.9252135043241245
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9714285714285715
+Variance in Accuracy: 0.0007709750566893439
+Average Macro F1 Score: 0.9683679706289758
+Variance in Macro F1 Score: 0.0007879085851355708
+Average Weighted F1 Score: 0.9715154690043241
+Variance in Weighted F1 Score: 0.0007602438230404225
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[41  0  0]
+ [17  0  0]
+ [26  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.49      1.00      0.66        41
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.00      0.00      0.00        26
+
+    accuracy                           0.49        84
+   macro avg       0.16      0.33      0.22        84
+weighted avg       0.24      0.49      0.32        84
+
+(D) Accuracy: 0.4880952380952381
+Macro Average F1 Score: 0.21866666666666665
+Weighted Average F1 Score: 0.32019047619047614
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[ 0  0 41]
+ [ 0  0 17]
+ [ 0  0 26]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.00      0.00      0.00        41
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.31      1.00      0.47        26
+
+    accuracy                           0.31        84
+   macro avg       0.10      0.33      0.16        84
+weighted avg       0.10      0.31      0.15        84
+
+(D) Accuracy: 0.30952380952380953
+Macro Average F1 Score: 0.15757575757575756
+Weighted Average F1 Score: 0.14632034632034632
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5476190476190477
+Variance in Accuracy: 0.01332199546485261
+Average Macro F1 Score: 0.32842581022815576
+Variance in Macro F1 Score: 0.021643433018824383
+Average Weighted F1 Score: 0.4183091079591086
+Variance in Weighted F1 Score: 0.027020700906111396
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[38  2  0]
+ [ 1 14  0]
+ [ 1  0 28]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.95      0.95      0.95        40
+   Chinstrap       0.88      0.93      0.90        15
+      Gentoo       1.00      0.97      0.98        29
+
+    accuracy                           0.95        84
+   macro avg       0.94      0.95      0.95        84
+weighted avg       0.95      0.95      0.95        84
+
+(D) Accuracy: 0.9523809523809523
+Macro Average F1 Score: 0.94522731560083
+Weighted Average F1 Score: 0.9528525615113052
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 2}(B) Confusion Matrix:
+[[38  1  1]
+ [ 1 14  0]
+ [ 1  0 28]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.95      0.95      0.95        40
+   Chinstrap       0.93      0.93      0.93        15
+      Gentoo       0.97      0.97      0.97        29
+
+    accuracy                           0.95        84
+   macro avg       0.95      0.95      0.95        84
+weighted avg       0.95      0.95      0.95        84
+
+(D) Accuracy: 0.9523809523809523
+Macro Average F1 Score: 0.9496168582375479
+Weighted Average F1 Score: 0.9523809523809523
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9619047619047618
+Variance in Accuracy: 0.00041950113378684816
+Average Macro F1 Score: 0.9565293127253209
+Variance in Macro F1 Score: 0.0006114462846440714
+Average Weighted F1 Score: 0.961938126080599
+Variance in Weighted F1 Score: 0.0004222173162035011
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[40  0  0]
+ [15  0  0]
+ [29  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.48      1.00      0.65        40
+   Chinstrap       0.00      0.00      0.00        15
+      Gentoo       0.00      0.00      0.00        29
+
+    accuracy                           0.48        84
+   macro avg       0.16      0.33      0.22        84
+weighted avg       0.23      0.48      0.31        84
+
+(D) Accuracy: 0.47619047619047616
+Macro Average F1 Score: 0.21505376344086022
+Weighted Average F1 Score: 0.3072196620583717
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[40  0  0]
+ [15  0  0]
+ [29  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.48      1.00      0.65        40
+   Chinstrap       0.00      0.00      0.00        15
+      Gentoo       0.00      0.00      0.00        29
+
+    accuracy                           0.48        84
+   macro avg       0.16      0.33      0.22        84
+weighted avg       0.23      0.48      0.31        84
+
+(D) Accuracy: 0.47619047619047616
+Macro Average F1 Score: 0.21505376344086022
+Weighted Average F1 Score: 0.3072196620583717
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5095238095238096
+Variance in Accuracy: 0.007902494331065763
+Average Macro F1 Score: 0.2717338522458751
+Variance in Macro F1 Score: 0.014299129577648558
+Average Weighted F1 Score: 0.3595091727272023
+Variance in Weighted F1 Score: 0.01586996652490332
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[36  1  0]
+ [ 1 16  0]
+ [ 1  0 29]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.95      0.97      0.96        37
+   Chinstrap       0.94      0.94      0.94        17
+      Gentoo       1.00      0.97      0.98        30
+
+    accuracy                           0.96        84
+   macro avg       0.96      0.96      0.96        84
+weighted avg       0.96      0.96      0.96        84
+
+(D) Accuracy: 0.9642857142857143
+Macro Average F1 Score: 0.9614091060152874
+Weighted Average F1 Score: 0.9644229217110573
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'gini', 'max_depth': None, 'min_samples_split': 2}(B) Confusion Matrix:
+[[35  2  0]
+ [ 0 17  0]
+ [ 1  0 29]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.97      0.95      0.96        37
+   Chinstrap       0.89      1.00      0.94        17
+      Gentoo       1.00      0.97      0.98        30
+
+    accuracy                           0.96        84
+   macro avg       0.96      0.97      0.96        84
+weighted avg       0.97      0.96      0.96        84
+
+(D) Accuracy: 0.9642857142857143
+Macro Average F1 Score: 0.9621331338303709
+Weighted Average F1 Score: 0.9646015837390345
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.9690476190476189
+Variance in Accuracy: 0.0002607709750566896
+Average Macro F1 Score: 0.9639880430878446
+Variance in Macro F1 Score: 0.00040259029176320125
+Average Weighted F1 Score: 0.9691382629009133
+Variance in Weighted F1 Score: 0.0002446665881288826
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[37  0  0]
+ [17  0  0]
+ [30  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.44      1.00      0.61        37
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.00      0.00      0.00        30
+
+    accuracy                           0.44        84
+   macro avg       0.15      0.33      0.20        84
+weighted avg       0.19      0.44      0.27        84
+
+(D) Accuracy: 0.44047619047619047
+Macro Average F1 Score: 0.20385674931129474
+Weighted Average F1 Score: 0.2693821330184966
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'logistic', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[37  0  0]
+ [17  0  0]
+ [30  0  0]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+      Adelie       0.44      1.00      0.61        37
+   Chinstrap       0.00      0.00      0.00        17
+      Gentoo       0.00      0.00      0.00        30
+
+    accuracy                           0.44        84
+   macro avg       0.15      0.33      0.20        84
+weighted avg       0.19      0.44      0.27        84
+
+(D) Accuracy: 0.44047619047619047
+Macro Average F1 Score: 0.20385674931129474
+Weighted Average F1 Score: 0.2693821330184966
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5642857142857143
+Variance in Accuracy: 0.015963718820861682
+Average Macro F1 Score: 0.3426029755707919
+Variance in Macro F1 Score: 0.02617447472735271
+Average Weighted F1 Score: 0.4321817823827521
+Variance in Weighted F1 Score: 0.029168118550150213
+
