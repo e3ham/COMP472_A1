@@ -1,520 +1,520 @@
 ------------------------------------------
 (A) Base-DT with default parameters
 (B) Confusion Matrix:
-[[133  47 149]
- [ 61 210  75]
- [132  68 170]]
+[[143  40 146]
+ [ 56 198  68]
+ [139  74 181]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.41      0.40      0.41       329
-           I       0.65      0.61      0.63       346
-           M       0.43      0.46      0.45       370
+           F       0.42      0.43      0.43       329
+           I       0.63      0.61      0.62       322
+           M       0.46      0.46      0.46       394
 
-    accuracy                           0.49      1045
-   macro avg       0.50      0.49      0.49      1045
-weighted avg       0.50      0.49      0.49      1045
+    accuracy                           0.50      1045
+   macro avg       0.51      0.50      0.50      1045
+weighted avg       0.50      0.50      0.50      1045
 
-(D) Accuracy: 0.4909090909090909
-Macro Average F1 Score: 0.4923548312810186
-Weighted Average F1 Score: 0.4926709343043593
+(D) Accuracy: 0.4995215311004785
+Macro Average F1 Score: 0.5040666346447588
+Weighted Average F1 Score: 0.5004441041622308
 
 ------------------------------------------
 (A) Top-DT with gridsearch
 Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
 Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 2}(B) Confusion Matrix:
-[[137  43 149]
- [ 31 240  75]
- [119  72 179]]
+[[155  60 114]
+ [ 44 235  43]
+ [190  73 131]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.48      0.42      0.44       329
-           I       0.68      0.69      0.68       346
-           M       0.44      0.48      0.46       370
+           F       0.40      0.47      0.43       329
+           I       0.64      0.73      0.68       322
+           M       0.45      0.33      0.38       394
 
-    accuracy                           0.53      1045
-   macro avg       0.53      0.53      0.53      1045
-weighted avg       0.53      0.53      0.53      1045
+    accuracy                           0.50      1045
+   macro avg       0.50      0.51      0.50      1045
+weighted avg       0.49      0.50      0.49      1045
 
-(D) Accuracy: 0.5320574162679426
-Macro Average F1 Score: 0.5308906486234938
-Weighted Average F1 Score: 0.5307348715731192
+(D) Accuracy: 0.49856459330143543
+Macro Average F1 Score: 0.4990261726051887
+Weighted Average F1 Score: 0.49066161809195763
 
 ------------------------------------------
 Repeated Evaluation for DecisionTreeClassifier
-Average Accuracy: 0.5230622009569378
-Variance in Accuracy: 0.00023354776676358168
-Average Macro F1 Score: 0.5204464335385082
-Variance in Macro F1 Score: 0.0002998019574701388
-Average Weighted F1 Score: 0.5192548377182495
-Variance in Weighted F1 Score: 0.00033966264706593503
+Average Accuracy: 0.5190430622009569
+Variance in Accuracy: 0.0002906893157207939
+Average Macro F1 Score: 0.5163971173789152
+Variance in Macro F1 Score: 0.00034129346535358043
+Average Weighted F1 Score: 0.5151540555609458
+Variance in Weighted F1 Score: 0.00041132552847098733
 
 ------------------------------------------
 (A) Base-MLP with default parameters
 (B) Confusion Matrix:
-[[  0  38 291]
- [  0 236 110]
- [  0  59 311]]
+[[  0  54 275]
+ [  0 205 117]
+ [  0  69 325]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
            F       0.00      0.00      0.00       329
-           I       0.71      0.68      0.70       346
-           M       0.44      0.84      0.57       370
+           I       0.62      0.64      0.63       322
+           M       0.45      0.82      0.59       394
 
-    accuracy                           0.52      1045
-   macro avg       0.38      0.51      0.42      1045
-weighted avg       0.39      0.52      0.43      1045
+    accuracy                           0.51      1045
+   macro avg       0.36      0.49      0.41      1045
+weighted avg       0.36      0.51      0.41      1045
 
-(D) Accuracy: 0.523444976076555
-Macro Average F1 Score: 0.4233337598240318
-Weighted Average F1 Score: 0.4337005890195609
+(D) Accuracy: 0.507177033492823
+Macro Average F1 Score: 0.40527591220660525
+Weighted Average F1 Score: 0.4149480800122706
 
 ------------------------------------------
 (A) Top-MLP with gridsearch
 Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
 Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}(B) Confusion Matrix:
-[[ 28  46 255]
- [  5 284  57]
- [ 36  84 250]]
+[[145  47 137]
+ [ 17 253  52]
+ [168  77 149]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.41      0.09      0.14       329
-           I       0.69      0.82      0.75       346
-           M       0.44      0.68      0.54       370
+           F       0.44      0.44      0.44       329
+           I       0.67      0.79      0.72       322
+           M       0.44      0.38      0.41       394
 
-    accuracy                           0.54      1045
-   macro avg       0.51      0.53      0.47      1045
-weighted avg       0.51      0.54      0.48      1045
+    accuracy                           0.52      1045
+   macro avg       0.52      0.53      0.52      1045
+weighted avg       0.51      0.52      0.52      1045
 
-(D) Accuracy: 0.5377990430622009
-Macro Average F1 Score: 0.47485087511195007
-Weighted Average F1 Score: 0.48170218664870423
+(D) Accuracy: 0.523444976076555
+Macro Average F1 Score: 0.5236852654704741
+Weighted Average F1 Score: 0.5150926954454597
 
 ------------------------------------------
 Repeated Evaluation for MLPClassifier
-Average Accuracy: 0.5393301435406699
-Variance in Accuracy: 0.00021926237952427829
-Average Macro F1 Score: 0.5094969664766309
-Variance in Macro F1 Score: 0.00044094556592349935
-Average Weighted F1 Score: 0.5103036442203324
-Variance in Weighted F1 Score: 0.0005840378041799039
+Average Accuracy: 0.5418181818181818
+Variance in Accuracy: 0.00031332616011538124
+Average Macro F1 Score: 0.4934906048489223
+Variance in Macro F1 Score: 0.0013757809434076502
+Average Weighted F1 Score: 0.4966770184170436
+Variance in Weighted F1 Score: 0.00152592403860318
 
 ------------------------------------------
 (A) Base-DT with default parameters
 (B) Confusion Matrix:
-[[131  42 140]
- [ 60 205  87]
- [138  72 170]]
+[[150  45 154]
+ [ 61 230  65]
+ [141  58 141]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.40      0.42      0.41       313
-           I       0.64      0.58      0.61       352
-           M       0.43      0.45      0.44       380
-
-    accuracy                           0.48      1045
-   macro avg       0.49      0.48      0.49      1045
-weighted avg       0.49      0.48      0.49      1045
-
-(D) Accuracy: 0.4842105263157895
-Macro Average F1 Score: 0.4855694806667688
-Weighted Average F1 Score: 0.4871748669721463
-
-------------------------------------------
-(A) Top-DT with gridsearch
-Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
-Best parameters: {'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 6}(B) Confusion Matrix:
-[[146  43 124]
- [ 54 236  62]
- [159  65 156]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.41      0.47      0.43       313
-           I       0.69      0.67      0.68       352
-           M       0.46      0.41      0.43       380
-
-    accuracy                           0.51      1045
-   macro avg       0.52      0.52      0.51      1045
-weighted avg       0.52      0.51      0.52      1045
-
-(D) Accuracy: 0.5148325358851674
-Macro Average F1 Score: 0.5149392310176529
-Weighted Average F1 Score: 0.5157216482056485
-
-------------------------------------------
-Repeated Evaluation for DecisionTreeClassifier
-Average Accuracy: 0.516555023923445
-Variance in Accuracy: 0.00020233969002541149
-Average Macro F1 Score: 0.5133707764082767
-Variance in Macro F1 Score: 0.00035359753013275544
-Average Weighted F1 Score: 0.5130913105291548
-Variance in Weighted F1 Score: 0.00030683189462625933
-
-------------------------------------------
-(A) Base-MLP with default parameters
-(B) Confusion Matrix:
-[[  0  26 287]
- [  0 213 139]
- [  0  55 325]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.00      0.00      0.00       313
-           I       0.72      0.61      0.66       352
-           M       0.43      0.86      0.57       380
-
-    accuracy                           0.51      1045
-   macro avg       0.39      0.49      0.41      1045
-weighted avg       0.40      0.51      0.43      1045
-
-(D) Accuracy: 0.5148325358851674
-Macro Average F1 Score: 0.41138512271212174
-Weighted Average F1 Score: 0.43111449148994174
-
-------------------------------------------
-(A) Top-MLP with gridsearch
-Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
-Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
-[[232  38  43]
- [ 71 264  17]
- [270  71  39]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.40      0.74      0.52       313
-           I       0.71      0.75      0.73       352
-           M       0.39      0.10      0.16       380
-
-    accuracy                           0.51      1045
-   macro avg       0.50      0.53      0.47      1045
-weighted avg       0.50      0.51      0.46      1045
-
-(D) Accuracy: 0.5119617224880383
-Macro Average F1 Score: 0.4716057140353041
-Weighted Average F1 Score: 0.4613882810956308
-
-------------------------------------------
-Repeated Evaluation for MLPClassifier
-Average Accuracy: 0.5420095693779905
-Variance in Accuracy: 0.0002756713445205009
-Average Macro F1 Score: 0.5003856401839923
-Variance in Macro F1 Score: 0.0015498972045512051
-Average Weighted F1 Score: 0.5015250626781249
-Variance in Weighted F1 Score: 0.001619363056544812
-
-------------------------------------------
-(A) Base-DT with default parameters
-(B) Confusion Matrix:
-[[134  45 127]
- [ 60 214  74]
- [146  69 176]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.39      0.44      0.41       306
-           I       0.65      0.61      0.63       348
-           M       0.47      0.45      0.46       391
+           F       0.43      0.43      0.43       349
+           I       0.69      0.65      0.67       356
+           M       0.39      0.41      0.40       340
 
     accuracy                           0.50      1045
    macro avg       0.50      0.50      0.50      1045
 weighted avg       0.51      0.50      0.50      1045
 
-(D) Accuracy: 0.5014354066985646
-Macro Average F1 Score: 0.5021100363741469
-Weighted Average F1 Score: 0.5038153710058674
+(D) Accuracy: 0.49856459330143543
+Macro Average F1 Score: 0.49948381748613224
+Weighted Average F1 Score: 0.5014423754928666
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 2}(B) Confusion Matrix:
+[[116  49 184]
+ [ 48 248  60]
+ [ 82  60 198]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.47      0.33      0.39       349
+           I       0.69      0.70      0.70       356
+           M       0.45      0.58      0.51       340
+
+    accuracy                           0.54      1045
+   macro avg       0.54      0.54      0.53      1045
+weighted avg       0.54      0.54      0.53      1045
+
+(D) Accuracy: 0.5377990430622009
+Macro Average F1 Score: 0.5306540007307271
+Weighted Average F1 Score: 0.5319681906463438
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.5213397129186602
+Variance in Accuracy: 0.00018329250703967413
+Average Macro F1 Score: 0.5183974927379791
+Variance in Macro F1 Score: 0.00023670402284831915
+Average Weighted F1 Score: 0.5172639904484033
+Variance in Weighted F1 Score: 0.0002617981629089791
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[  0  15 334]
+ [  0 182 174]
+ [  0  30 310]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.00      0.00      0.00       349
+           I       0.80      0.51      0.62       356
+           M       0.38      0.91      0.54       340
+
+    accuracy                           0.47      1045
+   macro avg       0.39      0.47      0.39      1045
+weighted avg       0.40      0.47      0.39      1045
+
+(D) Accuracy: 0.47081339712918663
+Macro Average F1 Score: 0.38658754916453614
+Weighted Average F1 Score: 0.386898572777636
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
+[[ 47  57 245]
+ [  6 305  45]
+ [ 37  75 228]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.52      0.13      0.21       349
+           I       0.70      0.86      0.77       356
+           M       0.44      0.67      0.53       340
+
+    accuracy                           0.56      1045
+   macro avg       0.55      0.55      0.50      1045
+weighted avg       0.56      0.56      0.51      1045
+
+(D) Accuracy: 0.5550239234449761
+Macro Average F1 Score: 0.5049407691776713
+Weighted Average F1 Score: 0.5064826640482492
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.543732057416268
+Variance in Accuracy: 0.0001572857764245324
+Average Macro F1 Score: 0.5020735404884542
+Variance in Macro F1 Score: 0.0017462595281491188
+Average Weighted F1 Score: 0.5030620546201432
+Variance in Weighted F1 Score: 0.001816798250037224
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[130  42 128]
+ [ 58 209  72]
+ [159  75 172]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.37      0.43      0.40       300
+           I       0.64      0.62      0.63       339
+           M       0.46      0.42      0.44       406
+
+    accuracy                           0.49      1045
+   macro avg       0.49      0.49      0.49      1045
+weighted avg       0.50      0.49      0.49      1045
+
+(D) Accuracy: 0.48899521531100476
+Macro Average F1 Score: 0.4908618418899208
+Weighted Average F1 Score: 0.4910610890112507
+
+------------------------------------------
+(A) Top-DT with gridsearch
+Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
+Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 2}(B) Confusion Matrix:
+[[142  44 114]
+ [ 32 243  64]
+ [192  74 140]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.39      0.47      0.43       300
+           I       0.67      0.72      0.69       339
+           M       0.44      0.34      0.39       406
+
+    accuracy                           0.50      1045
+   macro avg       0.50      0.51      0.50      1045
+weighted avg       0.50      0.50      0.50      1045
+
+(D) Accuracy: 0.5023923444976076
+Macro Average F1 Score: 0.5024841574012845
+Weighted Average F1 Score: 0.49790177957552195
+
+------------------------------------------
+Repeated Evaluation for DecisionTreeClassifier
+Average Accuracy: 0.5205741626794259
+Variance in Accuracy: 0.00027801561319566856
+Average Macro F1 Score: 0.5180239185945423
+Variance in Macro F1 Score: 0.00033224710065595686
+Average Weighted F1 Score: 0.5166572538911908
+Variance in Weighted F1 Score: 0.0003914531125680255
+
+------------------------------------------
+(A) Base-MLP with default parameters
+(B) Confusion Matrix:
+[[ 12  32 256]
+ [  1 233 105]
+ [ 11  64 331]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.50      0.04      0.07       300
+           I       0.71      0.69      0.70       339
+           M       0.48      0.82      0.60       406
+
+    accuracy                           0.55      1045
+   macro avg       0.56      0.51      0.46      1045
+weighted avg       0.56      0.55      0.48      1045
+
+(D) Accuracy: 0.5511961722488038
+Macro Average F1 Score: 0.45819775143095715
+Weighted Average F1 Score: 0.4818119506535598
+
+------------------------------------------
+(A) Top-MLP with gridsearch
+Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
+Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}(B) Confusion Matrix:
+[[153  37 110]
+ [ 26 249  64]
+ [185  65 156]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.42      0.51      0.46       300
+           I       0.71      0.73      0.72       339
+           M       0.47      0.38      0.42       406
+
+    accuracy                           0.53      1045
+   macro avg       0.53      0.54      0.54      1045
+weighted avg       0.53      0.53      0.53      1045
+
+(D) Accuracy: 0.5339712918660288
+Macro Average F1 Score: 0.5354985158023399
+Weighted Average F1 Score: 0.5311304047059885
+
+------------------------------------------
+Repeated Evaluation for MLPClassifier
+Average Accuracy: 0.5385645933014354
+Variance in Accuracy: 0.0002213868730111492
+Average Macro F1 Score: 0.5044644854247358
+Variance in Macro F1 Score: 0.0001581514776318523
+Average Weighted F1 Score: 0.5067271531443749
+Variance in Weighted F1 Score: 0.00028143138370454417
+
+------------------------------------------
+(A) Base-DT with default parameters
+(B) Confusion Matrix:
+[[140  56 137]
+ [ 45 203  77]
+ [127  77 183]]
+(C) Classification Report:
+              precision    recall  f1-score   support
+
+           F       0.45      0.42      0.43       333
+           I       0.60      0.62      0.61       325
+           M       0.46      0.47      0.47       387
+
+    accuracy                           0.50      1045
+   macro avg       0.50      0.51      0.51      1045
+weighted avg       0.50      0.50      0.50      1045
+
+(D) Accuracy: 0.5033492822966508
+Macro Average F1 Score: 0.5050553797613523
+Weighted Average F1 Score: 0.5022447282635342
 
 ------------------------------------------
 (A) Top-DT with gridsearch
 Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
 Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 6}(B) Confusion Matrix:
-[[132  42 132]
- [ 43 227  78]
- [134  70 187]]
+[[141  59 133]
+ [ 45 234  46]
+ [145  88 154]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.43      0.43      0.43       306
-           I       0.67      0.65      0.66       348
-           M       0.47      0.48      0.47       391
+           F       0.43      0.42      0.42       333
+           I       0.61      0.72      0.66       325
+           M       0.46      0.40      0.43       387
 
-    accuracy                           0.52      1045
-   macro avg       0.52      0.52      0.52      1045
-weighted avg       0.52      0.52      0.52      1045
+    accuracy                           0.51      1045
+   macro avg       0.50      0.51      0.51      1045
+weighted avg       0.50      0.51      0.50      1045
 
-(D) Accuracy: 0.522488038277512
-Macro Average F1 Score: 0.5215772774623098
-Weighted Average F1 Score: 0.5233550610713807
+(D) Accuracy: 0.5062200956937799
+Macro Average F1 Score: 0.5051220304573661
+Weighted Average F1 Score: 0.49991750457377976
 
 ------------------------------------------
 Repeated Evaluation for DecisionTreeClassifier
-Average Accuracy: 0.5201913875598085
-Variance in Accuracy: 0.0002174309196218032
-Average Macro F1 Score: 0.5172005128284928
-Variance in Macro F1 Score: 0.00028480789876859436
-Average Weighted F1 Score: 0.5158886439625323
-Variance in Weighted F1 Score: 0.0003385754156030744
+Average Accuracy: 0.5198086124401914
+Variance in Accuracy: 0.00024189922391886607
+Average Macro F1 Score: 0.5170353297349866
+Variance in Macro F1 Score: 0.0003009355929940812
+Average Weighted F1 Score: 0.5157042916436698
+Variance in Weighted F1 Score: 0.00034932462049952907
 
 ------------------------------------------
 (A) Base-MLP with default parameters
 (B) Confusion Matrix:
-[[  0  23 283]
- [  0 220 128]
- [  0  42 349]]
+[[  0  42 291]
+ [  0 213 112]
+ [  0  76 311]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.00      0.00      0.00       306
-           I       0.77      0.63      0.70       348
-           M       0.46      0.89      0.61       391
+           F       0.00      0.00      0.00       333
+           I       0.64      0.66      0.65       325
+           M       0.44      0.80      0.56       387
 
-    accuracy                           0.54      1045
-   macro avg       0.41      0.51      0.43      1045
-weighted avg       0.43      0.54      0.46      1045
+    accuracy                           0.50      1045
+   macro avg       0.36      0.49      0.40      1045
+weighted avg       0.36      0.50      0.41      1045
 
-(D) Accuracy: 0.5444976076555024
-Macro Average F1 Score: 0.4338439592103211
-Weighted Average F1 Score: 0.45838234322667376
+(D) Accuracy: 0.5014354066985646
+Macro Average F1 Score: 0.40477706888785514
+Weighted Average F1 Score: 0.41118084388215176
 
 ------------------------------------------
 (A) Top-MLP with gridsearch
 Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
 Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}(B) Confusion Matrix:
-[[ 99  40 167]
- [ 19 269  60]
- [119  66 206]]
+[[ 33  41 259]
+ [  7 247  71]
+ [ 22  71 294]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.42      0.32      0.36       306
-           I       0.72      0.77      0.74       348
-           M       0.48      0.53      0.50       391
+           F       0.53      0.10      0.17       333
+           I       0.69      0.76      0.72       325
+           M       0.47      0.76      0.58       387
 
     accuracy                           0.55      1045
-   macro avg       0.54      0.54      0.54      1045
-weighted avg       0.54      0.55      0.54      1045
+   macro avg       0.56      0.54      0.49      1045
+weighted avg       0.56      0.55      0.49      1045
 
 (D) Accuracy: 0.5492822966507177
-Macro Average F1 Score: 0.5362541996846576
-Weighted Average F1 Score: 0.5416597773624025
+Macro Average F1 Score: 0.49030440123479974
+Weighted Average F1 Score: 0.49324674377578775
 
 ------------------------------------------
 Repeated Evaluation for MLPClassifier
-Average Accuracy: 0.5399043062200957
-Variance in Accuracy: 0.0002591149470021294
-Average Macro F1 Score: 0.5028861952122594
-Variance in Macro F1 Score: 0.0009515145505394516
-Average Weighted F1 Score: 0.5029387428819204
-Variance in Weighted F1 Score: 0.0009968477613340636
+Average Accuracy: 0.5427751196172249
+Variance in Accuracy: 0.00019904306220095645
+Average Macro F1 Score: 0.5166187971224289
+Variance in Macro F1 Score: 0.0004840991700548332
+Average Weighted F1 Score: 0.5171568123584068
+Variance in Weighted F1 Score: 0.0005898387900647808
 
 ------------------------------------------
 (A) Base-DT with default parameters
 (B) Confusion Matrix:
-[[136  48 127]
- [ 47 211  84]
- [145  69 178]]
+[[117  50 143]
+ [ 53 226  65]
+ [146  71 174]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.41      0.44      0.43       311
-           I       0.64      0.62      0.63       342
-           M       0.46      0.45      0.46       392
+           F       0.37      0.38      0.37       310
+           I       0.65      0.66      0.65       344
+           M       0.46      0.45      0.45       391
 
-    accuracy                           0.50      1045
-   macro avg       0.51      0.50      0.50      1045
-weighted avg       0.51      0.50      0.50      1045
+    accuracy                           0.49      1045
+   macro avg       0.49      0.49      0.49      1045
+weighted avg       0.49      0.49      0.49      1045
 
-(D) Accuracy: 0.5023923444976076
-Macro Average F1 Score: 0.5037805707555549
-Weighted Average F1 Score: 0.5038033881872375
+(D) Accuracy: 0.49473684210526314
+Macro Average F1 Score: 0.4927068078000922
+Weighted Average F1 Score: 0.49466342658799506
 
 ------------------------------------------
 (A) Top-DT with gridsearch
 Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
-Best parameters: {'criterion': 'gini', 'max_depth': 10, 'min_samples_split': 6}(B) Confusion Matrix:
-[[110  39 162]
- [ 39 240  63]
- [113  77 202]]
+Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 6}(B) Confusion Matrix:
+[[114  52 144]
+ [ 42 248  54]
+ [172  79 140]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.42      0.35      0.38       311
-           I       0.67      0.70      0.69       342
-           M       0.47      0.52      0.49       392
+           F       0.35      0.37      0.36       310
+           I       0.65      0.72      0.69       344
+           M       0.41      0.36      0.38       391
 
-    accuracy                           0.53      1045
-   macro avg       0.52      0.52      0.52      1045
-weighted avg       0.52      0.53      0.52      1045
+    accuracy                           0.48      1045
+   macro avg       0.47      0.48      0.48      1045
+weighted avg       0.47      0.48      0.48      1045
 
-(D) Accuracy: 0.5282296650717704
-Macro Average F1 Score: 0.5216359099855702
-Weighted Average F1 Score: 0.5243640187067102
+(D) Accuracy: 0.48038277511961724
+Macro Average F1 Score: 0.47582833047469714
+Weighted Average F1 Score: 0.47555645266098184
 
 ------------------------------------------
 Repeated Evaluation for DecisionTreeClassifier
-Average Accuracy: 0.5161722488038277
-Variance in Accuracy: 0.00013464893202994423
-Average Macro F1 Score: 0.5132302881486689
-Variance in Macro F1 Score: 0.00026926441898641866
-Average Weighted F1 Score: 0.5129502912591299
-Variance in Weighted F1 Score: 0.0002166830264531365
+Average Accuracy: 0.5198086124401914
+Variance in Accuracy: 0.00014702960097067358
+Average Macro F1 Score: 0.5172770200976402
+Variance in Macro F1 Score: 0.0001939738190617813
+Average Weighted F1 Score: 0.5158672035359031
+Variance in Weighted F1 Score: 0.00021724419257433442
 
 ------------------------------------------
 (A) Base-MLP with default parameters
 (B) Confusion Matrix:
-[[  0  18 293]
- [  0 191 151]
- [  0  36 356]]
+[[  3  50 257]
+ [  0 243 101]
+ [  3  71 317]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.00      0.00      0.00       311
-           I       0.78      0.56      0.65       342
-           M       0.45      0.91      0.60       392
-
-    accuracy                           0.52      1045
-   macro avg       0.41      0.49      0.42      1045
-weighted avg       0.42      0.52      0.44      1045
-
-(D) Accuracy: 0.523444976076555
-Macro Average F1 Score: 0.41602734870745345
-Weighted Average F1 Score: 0.4370429010391653
-
-------------------------------------------
-(A) Top-MLP with gridsearch
-Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
-Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
-[[154  43 114]
- [ 27 277  38]
- [160  97 135]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.45      0.50      0.47       311
-           I       0.66      0.81      0.73       342
-           M       0.47      0.34      0.40       392
+           F       0.50      0.01      0.02       310
+           I       0.67      0.71      0.69       344
+           M       0.47      0.81      0.59       391
 
     accuracy                           0.54      1045
-   macro avg       0.53      0.55      0.53      1045
-weighted avg       0.53      0.54      0.53      1045
+   macro avg       0.55      0.51      0.43      1045
+weighted avg       0.54      0.54      0.45      1045
 
-(D) Accuracy: 0.5416267942583732
-Macro Average F1 Score: 0.533314668314242
-Weighted Average F1 Score: 0.5286304857294406
-
-------------------------------------------
-Repeated Evaluation for MLPClassifier
-Average Accuracy: 0.5368421052631579
-Variance in Accuracy: 0.00047544699068244876
-Average Macro F1 Score: 0.49364189535458947
-Variance in Macro F1 Score: 0.0009201354462762603
-Average Weighted F1 Score: 0.4945050751729916
-Variance in Weighted F1 Score: 0.0009869253292230774
-
-------------------------------------------
-(A) Base-DT with default parameters
-(B) Confusion Matrix:
-[[129  54 134]
- [ 55 215  74]
- [122  79 183]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.42      0.41      0.41       317
-           I       0.62      0.62      0.62       344
-           M       0.47      0.48      0.47       384
-
-    accuracy                           0.50      1045
-   macro avg       0.50      0.50      0.50      1045
-weighted avg       0.50      0.50      0.50      1045
-
-(D) Accuracy: 0.5043062200956938
-Macro Average F1 Score: 0.5025901827983926
-Weighted Average F1 Score: 0.5037148428815797
-
-------------------------------------------
-(A) Top-DT with gridsearch
-Parameters: criterion: [gini, entropy], max depth: [none, 10, 20], minimum sample split: [2, 4, 6]
-Best parameters: {'criterion': 'entropy', 'max_depth': 10, 'min_samples_split': 4}(B) Confusion Matrix:
-[[110  32 175]
- [ 35 246  63]
- [119  78 187]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.42      0.35      0.38       317
-           I       0.69      0.72      0.70       344
-           M       0.44      0.49      0.46       384
-
-    accuracy                           0.52      1045
-   macro avg       0.52      0.52      0.51      1045
-weighted avg       0.52      0.52      0.52      1045
-
-(D) Accuracy: 0.5196172248803828
-Macro Average F1 Score: 0.5146045882275349
-Weighted Average F1 Score: 0.516114974438969
-
-------------------------------------------
-Repeated Evaluation for DecisionTreeClassifier
-Average Accuracy: 0.5194258373205741
-Variance in Accuracy: 0.0001994093541814514
-Average Macro F1 Score: 0.5171634754950135
-Variance in Macro F1 Score: 0.0002592115502168074
-Average Weighted F1 Score: 0.5158119635739182
-Variance in Weighted F1 Score: 0.0002848548691620302
-
-------------------------------------------
-(A) Base-MLP with default parameters
-(B) Confusion Matrix:
-[[  0  44 273]
- [  0 238 106]
- [  0  78 306]]
-(C) Classification Report:
-              precision    recall  f1-score   support
-
-           F       0.00      0.00      0.00       317
-           I       0.66      0.69      0.68       344
-           M       0.45      0.80      0.57       384
-
-    accuracy                           0.52      1045
-   macro avg       0.37      0.50      0.42      1045
-weighted avg       0.38      0.52      0.43      1045
-
-(D) Accuracy: 0.5205741626794258
-Macro Average F1 Score: 0.4162113416673754
-Weighted Average F1 Score: 0.4329473790003463
+(D) Accuracy: 0.538755980861244
+Macro Average F1 Score: 0.4333915788120632
+Weighted Average F1 Score: 0.4541317085154058
 
 ------------------------------------------
 (A) Top-MLP with gridsearch
 Parameters: activation function: [sigmoid, tanh, relu], hidden layers: [(30, 50), (10, 10, 10)], solver: [adam, sgd]
-Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (30, 50), 'solver': 'adam'}(B) Confusion Matrix:
-[[136  34 147]
- [ 23 261  60]
- [131  71 182]]
+Best parameters: {'activation': 'tanh', 'hidden_layer_sizes': (10, 10, 10), 'solver': 'adam'}(B) Confusion Matrix:
+[[110  39 161]
+ [ 23 281  40]
+ [141  80 170]]
 (C) Classification Report:
               precision    recall  f1-score   support
 
-           F       0.47      0.43      0.45       317
-           I       0.71      0.76      0.74       344
-           M       0.47      0.47      0.47       384
+           F       0.40      0.35      0.38       310
+           I       0.70      0.82      0.76       344
+           M       0.46      0.43      0.45       391
 
-    accuracy                           0.55      1045
-   macro avg       0.55      0.55      0.55      1045
-weighted avg       0.55      0.55      0.55      1045
+    accuracy                           0.54      1045
+   macro avg       0.52      0.54      0.53      1045
+weighted avg       0.52      0.54      0.53      1045
 
-(D) Accuracy: 0.554066985645933
-Macro Average F1 Score: 0.5514031101036329
-Weighted Average F1 Score: 0.550990304195931
+(D) Accuracy: 0.5368421052631579
+Macro Average F1 Score: 0.5260942995249765
+Weighted Average F1 Score: 0.5273609823355191
 
 ------------------------------------------
 Repeated Evaluation for MLPClassifier
-Average Accuracy: 0.537224880382775
-Variance in Accuracy: 5.516357226254009e-05
-Average Macro F1 Score: 0.47536629255383733
-Variance in Macro F1 Score: 0.0001859560638593916
-Average Weighted F1 Score: 0.47540995156498855
-Variance in Weighted F1 Score: 0.00016065522903207306
+Average Accuracy: 0.5446889952153111
+Variance in Accuracy: 0.0001331105057118657
+Average Macro F1 Score: 0.5172234054682456
+Variance in Macro F1 Score: 0.0002289285097362287
+Average Weighted F1 Score: 0.5183713665617458
+Variance in Weighted F1 Score: 0.00036927518392166063
 

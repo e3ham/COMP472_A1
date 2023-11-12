@@ -150,13 +150,13 @@ print(f"Base-DT Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z_
 plt.figure(figsize=(20, 10))
 plot_tree(baseDT_penguins, filled=True, feature_names=X_train_penguins.columns,
           class_names=['Adelie', 'Chinstrap', 'Gentoo'])
-plt.savefig('penguins_tree_BT.png')
+plt.savefig('penguins_BaseDT.png')
 
 # Decision tree visualization for Abalone (with limited depth for visualization purposes)
 plt.figure(figsize=(20, 10))
 plot_tree(baseDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'],
           max_depth=3)
-plt.savefig('abalone_tree_BT.png')
+plt.savefig('abalone_BaseDT.png')
 
 # Define the hyperparameters grid for Top-DT
 dt_param_grid = {
@@ -205,13 +205,13 @@ repeated_evaluation(topDT_abalone, W_abalone, Z_abalone, 'abalone-performance.tx
 plt.figure(figsize=(20, 10))
 plot_tree(topDT_penguins, filled=True, feature_names=X_train_penguins.columns,
           class_names=['Adelie', 'Chinstrap', 'Gentoo'])
-plt.savefig('penguins_tree.png')
+plt.savefig('penguins_TopDT.png')
 
 # Decision tree visualization for Abalone (with limited depth for visualization purposes)
 plt.figure(figsize=(20, 10))
 plot_tree(topDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'],
           max_depth=3)
-plt.savefig('abalone_tree.png')
+plt.savefig('abalone_TopDT.png')
 
 print(f"Top-DT Best Parameters for Penguins: {grid_search_penguins_dt.best_params_}")
 print(f"Top-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, Y_pred_topDT_penguins)}")
@@ -267,7 +267,6 @@ print(f"Base-MLP Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z
 mlp_param_grid = {
     'hidden_layer_sizes': [(30, 50), (10, 10, 10)],
     'activation': ['logistic', 'tanh', 'relu'],
-
     # In scikit-learn, the 'logistic' activation function is equivalent to the sigmoid function.
     'solver': ['adam', 'sgd'],
 }
