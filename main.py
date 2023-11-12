@@ -146,6 +146,18 @@ print(f"Base-DT Accuracy for Penguins: {metrics.accuracy_score(Y_test_penguins, 
 print(f"Base-DT Parameters for Abalone: {baseDT_abalone.get_params()}")
 print(f"Base-DT Accuracy for Abalone: {metrics.accuracy_score(Z_test_abalone, Z_pred_abalone)}")
 
+# Decision tree visualization for Penguins
+plt.figure(figsize=(20, 10))
+plot_tree(baseDT_penguins, filled=True, feature_names=X_train_penguins.columns,
+          class_names=['Adelie', 'Chinstrap', 'Gentoo'])
+plt.savefig('penguins_tree_BT.png')
+
+# Decision tree visualization for Abalone (with limited depth for visualization purposes)
+plt.figure(figsize=(20, 10))
+plot_tree(baseDT_abalone, filled=True, feature_names=W_train_abalone.columns, class_names=['Male', 'Female', 'Infant'],
+          max_depth=3)
+plt.savefig('abalone_tree_BT.png')
+
 # Define the hyperparameters grid for Top-DT
 dt_param_grid = {
     'criterion': ['gini', 'entropy'],
