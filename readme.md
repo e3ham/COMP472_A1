@@ -9,3 +9,35 @@ For visualization, we plot the class distributions and decision trees for both d
 Key findings include the best parameters for the top-performing models obtained through grid search and the average performance metrics over multiple runs, providing insights into the models' reliability and predictive power.
 
 For a detailed understanding, all code, figures, and performance metric files are available within the assignment repository.
+
+
+Instructions:
+
+1. Make sure that the datasets are in the correct project folder.
+2. Ensure all libraries are installed.
+3. Run the program.
+4. Ignore the convergance warnings.
+5. In scikit-learn, the 'logistic' activation function is equivalent to the sigmoid function.
+6. Used logistic instead of sigmoid as an activation funtion in the grid for Top - MLP.
+7. You should see after running the program 1 time that it outputs the following files:
+
+   For Part 2:
+   abalone-classes.png
+   penguin-classes.png
+
+   For Part 4(A)
+   abalone_BaseDT.png
+   penguins_BaseDT.png
+
+   For Part 4(B)
+   abalone_TopDT.png
+   penguins_TopDT.png
+
+   For Part 5
+   penguin-performance.txt
+   abalone-performance.txt
+
+   For Part 6, run the program 4 more times and you should all the information appended to the part 5 files in the required 
+   format.
+
+   
